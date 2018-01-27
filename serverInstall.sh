@@ -1,8 +1,21 @@
 #!/bin/bash
 
+cp .bashrc* .vimrc /etc/skel
+chown root: /etc/skel/*
+cp .bashrc* .vimrc /root
+chown root: /root/*
+
+for user in $(getent passwd | awk -F: '($3 >= 1000) && ($3 < 65530) {print $1}'); do
+	echo Copy files for user: $user
+	cp .bashrc* .vimrc /home/$user
+	chown $user: /home/$user
+done
+
+
+
 apt update
 apt dist-upgrade
-apt install apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail
+apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix
 timedatectl set-timezone Europe/Berlin
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
@@ -39,3 +52,6 @@ deb [arch=amd64,i386] http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main
 ###PHP 7.1
 deb https://packages.sury.org/php/ stretch main
 EOT
+apt update
+apt dist-upgrade -y
+
