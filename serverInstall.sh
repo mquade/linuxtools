@@ -20,7 +20,7 @@ for user in $(getent passwd | awk -F: '($3 >= 1000) && ($3 < 65530) {print $1}')
 done
 
 apt update
-apt dist-upgrade
+apt dist-upgrade -y
 apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip openvpn dnsutils whois
 # Update source lists
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
