@@ -21,8 +21,8 @@ done
 
 apt update
 apt dist-upgrade
-apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix
- Update source lists
+apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip openvpn dnsutils whois
+# Update source lists
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
 wget https://nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key
@@ -60,6 +60,7 @@ deb https://packages.sury.org/php/ stretch main
 EOT
 apt update
 apt dist-upgrade -y
+make-cadir /etc/openvpn/easy-rsa2 
 
 
 
