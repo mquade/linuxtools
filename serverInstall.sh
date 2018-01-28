@@ -61,6 +61,13 @@ EOT
 apt update
 apt dist-upgrade -y
 make-cadir /etc/openvpn/easy-rsa2 
+cd /etc/ssl/certs
+time openssl dhparam -out dhparam.pem 4096
+rm /etc/ssh/moduli
+for length in 2048 3072 4096 8192; do
+	curl https://2ton.com.au/dhparam/$length/ssh >>/etc/ssh/moduli;
+done
+systemctl restart ssh
 
 
 
