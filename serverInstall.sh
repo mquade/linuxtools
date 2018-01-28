@@ -1,4 +1,12 @@
 #!/bin/bash
+# Set all locals
+timedatectl set-timezone Europe/Berlin && \
+	dpkg-reconfigure -f noninteractive tzdata && \
+	sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+	sed -i -e 's/# de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen && \
+	echo 'LANG="de_DE.UTF-8"'>/etc/default/locale && \
+	dpkg-reconfigure --frontend=noninteractive locales && \
+	update-locale LANG=de_DE.UTF-8
 
 cp .bashrc* .vimrc /etc/skel
 chown root: /etc/skel/*
@@ -11,12 +19,10 @@ for user in $(getent passwd | awk -F: '($3 >= 1000) && ($3 < 65530) {print $1}')
 	chown $user: /home/$user
 done
 
-
-
 apt update
 apt dist-upgrade
 apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix
-timedatectl set-timezone Europe/Berlin
+ Update source lists
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
 wget https://nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key
@@ -54,4 +60,6 @@ deb https://packages.sury.org/php/ stretch main
 EOT
 apt update
 apt dist-upgrade -y
+
+
 
