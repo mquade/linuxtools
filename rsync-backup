@@ -1,0 +1,35 @@
+#!/bin/bash
+# Den Pfad zum Quell- und Backupverzeichnis ohne abschließenden '/' angeben.
+backupSource="/etc /bin /home /root /sbin /opt /var"      # Welches Verzeichnis soll gesichert werden?
+backupDir=/mnt/backup      # Wo sollen die Sicherungen gespeichert werden?
+dailyDir=daily
+weeklyDir=weekly
+montlyDir=monthly
+persistantDir=persistant
+fsDir=filesystem
+confDir=configuration
+dbDir=database
+logDir=log
+currentDate=$(date -Id)_$(date +%H-%M)
+installedPackages=$backupDir/$dailyDir/$currentDate/$confDir/installedPackages.list
+
+
+#### Pre Backup Hooks
+mount $backupDir
+mkdir -p $backupDir/$dailyDir $backupDir/$weeklyDir $backupDir/$monthlyDir $backupDir/$persistantDir
+newestDailyBackup=$(find $backupDir/$dailyDir -maxdepth 1 -type d -iname '20*' -printf '%f\n' | sort -r | head -n 1)
+mkdir -p $backupDir/$dailyDir/$currentDate/$fsDir $backupDir/$dailyDir/$currentDate/$confDir $backupDir/$dailyDir/$currentDate/$dbDir $backupDir/$dailyDir/$currentDate/$logDir 
+
+echo "     ======== Backup started  "$(date -Id) $(date +%H:%M:%S)" ========" > $backupDir/$dailyDir/$currentDate/$logDir/rsync.log 
+
+dpkg --get-selections | awk '!/deinstall|purge|hold/' | cut -f1 | tr '\n' ' '  >> $installedPackages  2>&1 
+time rsync -avh --progress --delete --link-dest=$backupDir/$dailyDir/$newestDailyBackup/$fsDir $backupSource $backupDir/$dailyDir/$currentDate/$fsDir >> $backupDir/$dailyDir/$currentDate/$logDir/rsync.log
+
+echo "     ======== Backup finished "$(date -Id) $(date +%H:%M:%S)" ========" >> $backupDir/$dailyDir/$currentDate/$logDir/rsync.log
+
+
+#### Housekeeping
+# Move/Rotate
+#find /mnt/backup01-hetzner/loop01_daily/filesystem/  -maxdepth 1 -type d -name '20[0-9]*' -mtime +42 -print0 | xargs -0 rm -fr
+# Delete old backups
+umount /mnt/backup
