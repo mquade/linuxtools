@@ -28,7 +28,7 @@ apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
 wget https://nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-cat <<EOT >> /etc/apt/source.list
+cat <<EOT >> /etc/apt/sources.list
 #------------------------------------------------------------------------------#
 # OFFICIAL DEBIAN REPOS 
 #------------------------------------------------------------------------------#
