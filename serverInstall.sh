@@ -21,13 +21,15 @@ done
 
 apt update
 apt dist-upgrade -y
-apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip openvpn dnsutils whois lvm2
-# Update source lists
-curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip openvpn dnsutils whois lvm2 ufw
+# MariaDB
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
-wget https://nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+# Sury / PHP
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xB188E2B695BD4743
+# nginx
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xABF5BD827BD9BF62
+# PostgreSQL
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0x7FCC7D46ACCC4CF8
 cat <<EOT >> /etc/apt/sources.list
 #------------------------------------------------------------------------------#
 # OFFICIAL DEBIAN REPOS 
@@ -68,6 +70,3 @@ for length in 2048 3072 4096 8192; do
 	curl https://2ton.com.au/dhparam/$length/ssh >>/etc/ssh/moduli;
 done
 systemctl restart ssh
-
-
-
