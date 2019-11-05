@@ -28,7 +28,7 @@ wget -q -O- https://nginx.org/keys/nginx_signing.key | apt-key add -
 wget -q -O- https://packages.sury.org/php/apt.gpg | apt-key add -
 wget -q -O- https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
-cat <<EOT >> /etc/apt/sources.list
+cat <<EOT > /etc/apt/sources.list
 #------------------------------------------------------------------------------#
 #                   OFFICIAL DEBIAN REPOS                    
 #------------------------------------------------------------------------------#
@@ -45,6 +45,11 @@ deb-src http://deb.debian.org/debian-security buster/updates main
 
 deb http://ftp.debian.org/debian buster-backports main
 deb-src http://ftp.debian.org/debian buster-backports main
+
+deb http://security.debian.org/debian-security buster/updates main
+deb-src http://security.debian.org/debian-security buster/updates main
+
+deb http://security.debian.org/ buster/updates main contrib non-free
 
 #------------------------------------------------------------------------------#
 #                      UNOFFICIAL  REPOS                       
@@ -69,6 +74,7 @@ deb https://packages.sury.org/php/ buster main
 deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main
 
 EOT
+
 apt update
 apt dist-upgrade -y
 make-cadir /etc/openvpn/easy-rsa2 
