@@ -22,43 +22,52 @@ done
 apt update
 apt dist-upgrade -y
 apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip openvpn dnsutils whois lvm2 ufw
-# MariaDB
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
-# Sury / PHP
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xB188E2B695BD4743
-# nginx
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xABF5BD827BD9BF62
-# PostgreSQL
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0x7FCC7D46ACCC4CF8
+wget -q -O- https://download.docker.com/linux/debian/gpg | apt-key add -
+wget -q -O- https://nginx.org/keys/nginx_signing.key | apt-key add -
+wget -q -O- https://packages.sury.org/php/apt.gpg | apt-key add -
+wget -q -O- https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+
 cat <<EOT >> /etc/apt/sources.list
 #------------------------------------------------------------------------------#
-# OFFICIAL DEBIAN REPOS 
+#                   OFFICIAL DEBIAN REPOS                    
 #------------------------------------------------------------------------------#
+
 ###### Debian Main Repos
-deb http://deb.debian.org/debian/ stable main contrib non-free
-deb-src http://deb.debian.org/debian/ stable main contrib non-free
-deb http://deb.debian.org/debian/ stable-updates main contrib non-free
-deb-src http://deb.debian.org/debian/ stable-updates main contrib non-free
-deb http://deb.debian.org/debian-security stable/updates main
-deb-src http://deb.debian.org/debian-security stable/updates main
-deb http://ftp.debian.org/debian stretch-backports main
-deb-src http://ftp.debian.org/debian stretch-backports main
+deb http://deb.debian.org/debian/ buster main contrib non-free
+deb-src http://deb.debian.org/debian/ buster main contrib non-free
+
+deb http://deb.debian.org/debian/ buster-updates main contrib non-free
+deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free
+
+deb http://deb.debian.org/debian-security buster/updates main
+deb-src http://deb.debian.org/debian-security buster/updates main
+
+deb http://ftp.debian.org/debian buster-backports main
+deb-src http://ftp.debian.org/debian buster-backports main
+
 #------------------------------------------------------------------------------#
-# UNOFFICIAL REPOS 
+#                      UNOFFICIAL  REPOS                       
 #------------------------------------------------------------------------------#
+
 ###### 3rd Party Binary Repos
 ###Docker CE
-deb [arch=amd64] https://download.docker.com/linux/debian stretch stable
+deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+
 ###MariaDB
-deb [arch=i386,amd64] http://mirror.23media.de/mariadb/repo/10.2/debian stretch main
-deb-src [arch=i386,amd64] http://mirror.23media.de/mariadb/repo/10.2/debian stretch main
+deb [arch=amd64] http://mirror.23media.de/mariadb/repo/10.2/debian stretch main
+deb-src [arch=amd64] http://mirror.23media.de/mariadb/repo/10.2/debian stretch main
+
 ###nginx
-deb [arch=amd64,i386] http://nginx.org/packages/debian/ stretch nginx
-deb-src [arch=amd64,i386] http://nginx.org/packages/debian/ stretch nginx
+deb [arch=amd64] http://nginx.org/packages/debian/ buster nginx
+deb-src [arch=amd64] http://nginx.org/packages/debian/ stretch nginx
+
+###PHP
+deb https://packages.sury.org/php/ buster main
+
 ###PostgreSQL
-deb [arch=amd64,i386] http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main
-###PHP 7.1
-deb https://packages.sury.org/php/ stretch main
+deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main
+
 EOT
 apt update
 apt dist-upgrade -y
