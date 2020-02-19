@@ -21,7 +21,7 @@ done
 
 apt update
 apt dist-upgrade -y
-apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip openvpn dnsutils whois lvm2 ufw
+apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip openvpn dnsutils whois lvm2 ufw rsync
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
 wget -q -O- https://download.docker.com/linux/debian/gpg | apt-key add -
 wget -q -O- https://nginx.org/keys/nginx_signing.key | apt-key add -
@@ -60,8 +60,8 @@ deb http://security.debian.org/ buster/updates main contrib non-free
 deb [arch=amd64] https://download.docker.com/linux/debian buster stable
 
 ###MariaDB
-deb [arch=amd64] http://mirror.23media.de/mariadb/repo/10.2/debian stretch main
-deb-src [arch=amd64] http://mirror.23media.de/mariadb/repo/10.2/debian stretch main
+deb [arch=amd64] http://mirror.23media.de/mariadb/repo/10.3/debian buster main
+deb-src [arch=amd64] http://mirror.23media.de/mariadb/repo/10.3/debian buster main
 
 ###nginx
 deb [arch=amd64] http://nginx.org/packages/debian/ buster nginx
