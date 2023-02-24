@@ -30,48 +30,25 @@ wget -q -O- https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
 cat <<EOT > /etc/apt/sources.list
 #------------------------------------------------------------------------------#
-#                   OFFICIAL DEBIAN REPOS                    
+#                   OFFICIAL DEBIAN REPOS                                      #
 #------------------------------------------------------------------------------#
 
-###### Debian Main Repos
-deb http://deb.debian.org/debian/ buster main contrib non-free
-deb-src http://deb.debian.org/debian/ buster main contrib non-free
+deb http://ftp.de.debian.org/debian/ bullseye main contrib non-free
+deb-src http://ftp.de.debian.org/debian/ bullseye main contrib non-free
 
-deb http://deb.debian.org/debian/ buster-updates main contrib non-free
-deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free
+deb http://ftp.de.debian.org/debian/ bullseye-updates main contrib non-free
+deb-src  http://ftp.de.debian.org/debian/ bullseye-updates main contrib non-free
 
-deb http://deb.debian.org/debian-security buster/updates main
-deb-src http://deb.debian.org/debian-security buster/updates main
+deb http://security.debian.org/debian-security/ bullseye-security main contrib non-free
+deb-src http://security.debian.org/debian-security/ bullseye-security main contrib non-free
 
-deb http://ftp.debian.org/debian buster-backports main
-deb-src http://ftp.debian.org/debian buster-backports main
-
-deb http://security.debian.org/debian-security buster/updates main
-deb-src http://security.debian.org/debian-security buster/updates main
-
-deb http://security.debian.org/ buster/updates main contrib non-free
+deb http://deb.debian.org/debian bullseye-backports main contrib non-free
+deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free
 
 #------------------------------------------------------------------------------#
-#                      UNOFFICIAL  REPOS                       
+#                      UNOFFICIAL  REPOS                                       #
 #------------------------------------------------------------------------------#
 
-###### 3rd Party Binary Repos
-###Docker CE
-deb [arch=amd64] https://download.docker.com/linux/debian buster stable
-
-###MariaDB
-deb [arch=amd64] http://mirror.23media.de/mariadb/repo/10.5/debian buster main
-deb-src [arch=amd64] http://mirror.23media.de/mariadb/repo/10.5/debian buster main
-
-###nginx
-deb [arch=amd64] http://nginx.org/packages/debian/ buster nginx
-deb-src [arch=amd64] http://nginx.org/packages/debian/ stretch nginx
-
-###PHP
-deb https://packages.sury.org/php/ buster main
-
-###PostgreSQL
-deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main
 
 EOT
 
