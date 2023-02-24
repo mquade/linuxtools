@@ -21,12 +21,7 @@ done
 
 apt update
 apt dist-upgrade -y
-apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip openvpn dnsutils whois lvm2 ufw rsync
-apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
-wget -q -O- https://download.docker.com/linux/debian/gpg | apt-key add -
-wget -q -O- https://nginx.org/keys/nginx_signing.key | apt-key add -
-wget -q -O- https://packages.sury.org/php/apt.gpg | apt-key add -
-wget -q -O- https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+apt install -y lsb-release 
 
 cat <<EOT > /etc/apt/sources.list
 #------------------------------------------------------------------------------#
@@ -49,8 +44,16 @@ deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free
 #                      UNOFFICIAL  REPOS                                       #
 #------------------------------------------------------------------------------#
 
-
 EOT
+
+apt update
+apt dist-upgrade -y
+apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip openvpn dnsutils whois lvm2 ufw rsync
+wget -q -O- https://download.docker.com/linux/debian/gpg | apt-key add -
+
+echo -e "### Docker \ndeb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian $(lsb_release -cs) stable" >> /etc/apt/sources.list
+
+
 
 apt update
 apt dist-upgrade -y
