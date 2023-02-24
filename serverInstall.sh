@@ -53,13 +53,13 @@ wget -q -O- https://download.docker.com/linux/debian/gpg | apt-key add -
 
 echo -e "### Docker \ndeb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian $(lsb_release -cs) stable" >> /etc/apt/sources.list
 
-apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 apt update
 apt dist-upgrade -y
-make-cadir /etc/openvpn/easy-rsa2 
-cd /etc/ssl/certs
-time openssl dhparam -out dhparam.pem 4096
+#make-cadir /etc/openvpn/easy-rsa2 
+#cd /etc/ssl/certs
+#time openssl dhparam -out dhparam.pem 4096
 rm /etc/ssh/moduli
 for length in 2048 3072 4096 8192; do
 	curl https://2ton.com.au/dhparam/$length/ssh >>/etc/ssh/moduli;
