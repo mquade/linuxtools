@@ -48,12 +48,12 @@ EOT
 
 apt update
 apt dist-upgrade -y
-apt install -y apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip openvpn dnsutils whois lvm2 ufw rsync
+apt install -y openssh-server apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip dnsutils whois lvm2 ufw rsync gnupg
 wget -q -O- https://download.docker.com/linux/debian/gpg | apt-key add -
 
 echo -e "### Docker \ndeb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian $(lsb_release -cs) stable" >> /etc/apt/sources.list
 
-
+apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 apt update
 apt dist-upgrade -y
