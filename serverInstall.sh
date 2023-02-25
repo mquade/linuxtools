@@ -48,7 +48,7 @@ EOT
 
 apt update
 apt dist-upgrade -y
-apt install -y openssh-server apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip dnsutils whois lvm2 ufw rsync gnupg
+apt install -y openssh-server man apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip dnsutils whois lvm2 ufw rsync gnupg
 wget -q -O- https://download.docker.com/linux/debian/gpg | apt-key add -
 
 echo -e "### Docker \ndeb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/debian $(lsb_release -cs) stable" >> /etc/apt/sources.list
