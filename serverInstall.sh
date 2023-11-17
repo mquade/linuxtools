@@ -50,7 +50,7 @@ EOT
 
 apt update
 apt dist-upgrade -y
-apt install -y man apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip dnsutils whois lvm2 ufw rsync gnupg pwgen sudo
+apt install -y man apt-transport-https lsb-release ca-certificates curl wget dirmngr htop screen unzip nano vim-nox mc git multitail dos2unix python3-pip dnsutils whois lvm2 ufw rsync gnupg pwgen sudo net-tools
 
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
