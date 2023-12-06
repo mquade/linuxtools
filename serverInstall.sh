@@ -80,5 +80,5 @@ echo -e "\n# Restrict key exchange, cipher, and MAC algorithms, as per sshaudit.
 
 systemctl restart ssh
 echo "If you wold like to install Docker, use"
-ehco "apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
+echo "apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
 
